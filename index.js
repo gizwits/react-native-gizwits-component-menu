@@ -6,7 +6,8 @@ import {
   View,
   Modal,
   SafeAreaView,
-  UIManager
+  UIManager,
+  TouchableOpacity
 } from 'react-native';
 import MenuItem from './MenuItem';
 
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   },
 });
 
-// data:[{icon,text,onClick}],lineCount:3
+// data:[{icon,text,onPress}],lineCount:3
 export default class Menu extends Component {
   constructor(props) {
     super(props);
@@ -70,7 +71,7 @@ export default class Menu extends Component {
 
 
     render() {
-      const { data, visible } = this.props;
+      const { data, visible, maskClick } = this.props;
       const { width } = this.state;
       const list = [];
       let line = parseInt(data.length / this.lineCount, 10);
@@ -94,7 +95,7 @@ export default class Menu extends Component {
           }}
         >
           <View style={styles.container} onLayout={this._onLayout}>
-            <TouchableHighlight style={styles.maskView} onPress={this.props.maskClick}>
+            <TouchableHighlight style={styles.maskView} onPress={maskClick}>
               <SafeAreaView style={{ flex: 1 }}>
                 <View style={{ ...styles.content, height: line * 100, width: contentWidth }}>
                   <Image source={arrow} style={{ width: 15, height: 15, right: 8, top: -13, position: 'absolute' }} />
@@ -103,9 +104,9 @@ export default class Menu extends Component {
                       return (<View style={{ ...styles.line, width: (arr.length * itemWidth) }} key={index}>
                         {
                           arr.map((item, subIndex) => {
-                            return (<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} key={index * 10 + subIndex}>
-                              <MenuItem style={{ height: 100, itemWidth }} icon={item.icon} text={item.text} onPress={item.onPress} />
-                            </View>);
+                            return (<TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} onPress={item.onPress} key={index * 10 + subIndex}>
+                              <MenuItem style={{ height: 100, itemWidth }} icon={item.icon} text={item.text} />
+                            </TouchableOpacity>);
                           })
                         }
                       </View>);

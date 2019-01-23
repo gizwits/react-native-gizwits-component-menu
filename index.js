@@ -7,7 +7,8 @@ import {
   Modal,
   SafeAreaView,
   UIManager,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import MenuItem from './MenuItem';
 
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   },
   content: {
     // flex: 1,
-    marginTop: 44 + 8,
+    marginTop: 44 + 8 + (StatusBar.currentHeight ? StatusBar.currentHeight : 0),
     marginHorizontal: 10,
     // backgroundColor: 'rgba(0,255,255,0.2)',
     alignItems: 'flex-end',

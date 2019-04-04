@@ -96,7 +96,7 @@ export default class Menu extends Component {
           }}
         >
           <View style={styles.container} onLayout={this._onLayout}>
-            <TouchableHighlight style={styles.maskView} onPress={maskClick}>
+            <TouchableHighlight style={styles.maskView} activeOpacity={0} onPress={maskClick}>
               <SafeAreaView style={{ flex: 1 }}>
                 <View style={{ ...styles.content, height: line * 100, width: contentWidth }}>
                   <Image source={arrow} style={{ width: 15, height: 15, right: 8, top: -13, position: 'absolute' }} />

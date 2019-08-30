@@ -56,69 +56,70 @@ export default class Menu extends Component {
     };
   }
 
-    getData = (data, lineCount) => {
+  getData = (data, lineCount) => {
 
-    }
+  }
 
-    _onLayout = (e) => {
-      UIManager.measure(e.target, (x, y, width, height, pageX, pageY) => {
-        if (width !== this.state.width) {
-          this.setState({
-            width,
-          });
-        }
-      });
-    }
-
-
-    render() {
-      const { data, visible, maskClick } = this.props;
-      const { width } = this.state;
-      const list = [];
-      let line = parseInt(data.length / this.lineCount, 10);
-      if (data.length % this.lineCount > 0) { line++; }
-      for (let index = 0; index < line; index++) {
-        const subArr = data.slice(index * this.lineCount, (index + 1) * this.lineCount);
-        list.push(subArr);
+  _onLayout = (e) => {
+    UIManager.measure(e.target, (x, y, width, height, pageX, pageY) => {
+      if (width !== this.state.width) {
+        this.setState({
+          width,
+        });
       }
-      const contentWidth = width - 20;
-      const itemWidth = (width - 20) / this.lineCount;
-      const bgWidth = data.length < 3 ? itemWidth * data.length : contentWidth;
+    });
+  }
 
-      return (
-        <Modal
-          style={{ flex: 1 }}
-          animationType="fade"
-          transparent
-          visible={visible}
-          onRequestClose={() => {
-            // 安卓上必填，默认不处理
-          }}
-        >
-          <View style={styles.container} onLayout={this._onLayout}>
-            <TouchableOpacity style={styles.maskView} activeOpacity={1} onPress={maskClick}>
-              <SafeAreaView style={{ flex: 1 }}>
-                <View style={{ ...styles.content, height: line * 100, width: contentWidth }}>
-                  <Image source={arrow} style={{ width: 15, height: 15, right: 8, top: -13, position: 'absolute' }} />
-                  <View style={{ ...styles.bg, width: bgWidth }}>
-                    {list.map((arr, index) => {
-                      return (<View style={{ ...styles.line, width: (arr.length * itemWidth) }} key={index}>
-                        {
-                          arr.map((item, subIndex) => {
-                            return (<TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} onPress={item.onPress} key={index * 10 + subIndex}>
-                              <MenuItem style={{ height: 100, itemWidth }} icon={item.icon} text={item.text} />
-                            </TouchableOpacity>);
-                          })
-                        }
-                      </View>);
-                    })}
-                  </View>
-                </View>
-              </SafeAreaView>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      );
+
+  render() {
+    const { data, visible, maskClick } = this.props;
+    const { width } = this.state;
+    const list = [];
+    let line = parseInt(data.length / this.lineCount, 10);
+    if (data.length % this.lineCount > 0) { line++; }
+    for (let index = 0; index < line; index++) {
+      const subArr = data.slice(index * this.lineCount, (index + 1) * this.lineCount);
+      list.push(subArr);
     }
+    const contentWidth = width - 20;
+    const itemWidth = (width - 20) / this.lineCount;
+    const bgWidth = data.length < 3 ? itemWidth * data.length : contentWidth;
+
+    return (
+      <Modal
+        style={{ flex: 1 }}
+        animationType="fade"
+        transparent
+        visible={visible}
+        onRequestClose={() => {
+          // 安卓上必填，默认不处理
+        }}
+      >
+        <View style={styles.container} onLayout={this._onLayout}>
+          <TouchableOpacity style={styles.maskView} activeOpacity={1} onPress={maskClick}>
+            <SafeAreaView style={{ flex: 1 }}>
+              <View style={{ ...styles.content, height: line * 100, width: contentWidth }}>
+                <Image source={arrow} style={{ width: 15, height: 15, right: 8, top: -13, position: 'absolute' }} />
+                <View style={{ ...styles.bg, width: bgWidth }}>
+                  {list.map((arr, index) => {
+                    return (<View style={{ ...styles.line, width: (arr.length * itemWidth) }} key={index}>
+                      {
+                        arr.map((item, subIndex) => {
+                          const { text, icon, accessible, accessibilityLabel, testID } = item;
+                          return (<TouchableOpacity accessible={accessible} accessibilityLabel={accessibilityLabel} testID={testID} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} onPress={item.onPress} key={index * 10 + subIndex}>
+                            <MenuItem style={{ height: 100, itemWidth }} icon={icon} text={text} />
+                          </TouchableOpacity>);
+                        })
+                      }
+                    </View>);
+                  })}
+                </View>
+              </View>
+            </SafeAreaView>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    );
+  }
 }
 

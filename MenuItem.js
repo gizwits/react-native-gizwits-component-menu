@@ -25,7 +25,7 @@ export default class MenuItem extends Component {
         >
           {icon ? <Image source={icon} style={styles.icon} /> : null}
           {typeof text === 'string' ?
-            <Text style={textStyle || styles.text}>{text}</Text>
+            <Text numberOfLines={1} ellipsizeMode='tail' style={textStyle || styles.text}>{text}</Text>
             : text
           }
         </View>

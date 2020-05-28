@@ -1,8 +1,7 @@
-
 {
   "name": "react-native-gizwits-component-menu",
-  "version": "1.0.5",
-  "description": "",
+  "version": "1.0.6",
+  "description": "支持菜单背景颜色参数，菜单名称字体样式参数",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +14,5 @@
   "peerDependencies": {
     "react-native": "^0.41.2",
     "react-native-windows": "0.41.0-rc.1"
-
   }
 }

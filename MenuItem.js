@@ -17,19 +17,19 @@ const styles = StyleSheet.create({
 });
 
 export default class MenuItem extends Component {
-    render() {
-      const { icon, text, textStyle } = this.props;
-      return (
-        <View
-          style={styles.button}
-        >
-          {icon ? <Image source={icon} style={styles.icon} /> : null}
-          {typeof text === 'string' ?
-            <Text numberOfLines={1} ellipsizeMode='tail' style={textStyle || styles.text}>{text}</Text>
-            : text
-          }
-        </View>
-      );
-    }
+  render() {
+    const { icon, text, textStyle } = this.props;
+    return (
+      <View
+        style={styles.button}
+      >
+        {icon ? <Image source={icon} style={styles.icon} /> : null}
+        {typeof text === 'string' ?
+          <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.text, textStyle]}>{text}</Text>
+          : text
+        }
+      </View>
+    );
+  }
 }
 

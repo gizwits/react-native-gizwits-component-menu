@@ -1,6 +1,6 @@
 {
   "name": "react-native-gizwits-component-menu",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "支持菜单背景颜色参数，菜单名称字体样式参数",
   "main": "index.js",
   "scripts": {
